@@ -7,8 +7,7 @@ class ViewingPartiesController < ApplicationController
 
   def create
     movie = MovieFacade.movie_info(params[:movie_id])
-    viewing_party = ViewingParty.new(movie_id: params[:movie_id], duration: params[:duration], date: params[:date],
-                                     start_time: params[:start_time])
+    viewing_party = ViewingParty.new(movie_id: params[:movie_id], duration: params[:duration], date: params[:date], start_time: params[:start_time])
     if viewing_party.duration < movie.runtime
       flash[:alert] = "Error: Duration of the viewing party must be longer than the movie's runtime."
       redirect_to "/users/#{params[:user_id]}/movies/#{params[:movie_id]}/viewing-party/new"
