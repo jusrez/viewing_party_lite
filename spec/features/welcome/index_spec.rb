@@ -49,5 +49,18 @@ RSpec.describe 'Welcome Index' do
 
       expect(current_path).to eq(user_path(user)) 
     end
+
+    it 'when i fail to fill in my correct credentials im taken back to the log in page and i can see a flash message telling me that I entered incorrect credentials' do
+      user = create(:user)
+
+      visit login_path
+      
+      fill_in 'E-mail:', with: "#{user.email}"
+      fill_in 'Password:', with: "WRONGPASSWORD"
+      click_button 'Log In'
+      
+      expect(current_path).to eq login_path
+      expect(page).to have_content("Error: The credentials provided are bad")
+    end
   end
 end
