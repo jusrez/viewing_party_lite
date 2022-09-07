@@ -33,5 +33,21 @@ RSpec.describe 'Welcome Index' do
 
       expect(current_path).to eq(root_path)
     end
+
+    it 'i see a link for login and when i click the link, im taken to a page where i can input my unique email and password. When i enter my unique email and correct password im taken to my dashboard page' do
+      user = create(:user)
+
+      expect(page).to have_link('Log In')
+      
+      click_link 'Log In'
+
+      expect(current_path).to eq(login_path)
+      
+      fill_in 'E-mail:', with: "#{user.email}"
+      fill_in 'Password:', with: "#{user.password}"
+      click_button 'Log In'
+
+      expect(current_path).to eq(user_path(user)) 
+    end
   end
 end

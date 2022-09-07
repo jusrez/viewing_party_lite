@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  def new; end
+  def new
+  end
 
   def create
     user = User.new(user_params)
@@ -16,6 +17,15 @@ class UsersController < ApplicationController
     @viewing_parties = @user.viewing_parties
     movie_ids = @viewing_parties.map { |vp| vp.movie_id }
     @movies = MovieFacade.movies(movie_ids)
+  end
+
+  def login_form
+  end
+
+  def login_user
+    user = User.find_by(email: params[:email])
+    flash[:success] = "Welcome, #{user.name}"
+    redirect_to user_path(user)
   end
 
   private
