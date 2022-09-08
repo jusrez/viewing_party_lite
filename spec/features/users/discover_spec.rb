@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'DiscoverMoviesPage', type: :feature do
-  @users = let!(:users) { create_list(:user, 3) }
+  # @users = let!(:users) { create_list(:user, 3) }
+  before :each do
+    
+  end
 
   it 'has a button to Discover Top Rated Movies and a search bar' do
     user1 = users[0]
